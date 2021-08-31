@@ -1,23 +1,29 @@
-import logo from './logo.svg';
 import './App.css';
+import Graphcomp from './Graphcomp';
+import { Switch, Route, BrowserRouter} from 'react-router-dom';
+import Victorycomp from './Victorcomp';
+import { LineChart } from './LineChart';
+import { LineGraph } from './LineGraph';
 
-function App() {
+function App() { 
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+    <BrowserRouter>
+    <div>
+      <Switch>
+        <Route path="/graph" component={Graphcomp}>
+        </Route>
+        <Route path="/victory" component={Victorycomp}>
+        </Route>
+        <Route path="/line" component={LineGraph}>
+        </Route>
+        <Route path="/linechart" component={LineChart}>
+        </Route>
+      </Switch>
+    </div>
+  </BrowserRouter>
+    <Graphcomp/>
     </div>
   );
 }
