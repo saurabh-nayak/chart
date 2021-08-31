@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {AreaChart, XAxis, YAxis, Tooltip, Area, Rectangle, Line} from 'recharts';
+import {AreaChart, XAxis, YAxis, Tooltip, Area, Rectangle, Line, ResponsiveContainer} from 'recharts';
 import CustomizedDot from './CustomizedDot';
 
 
@@ -89,6 +89,7 @@ export default class Graphcomp extends Component {
       <button onClick={()=>{
       this.setState(this.state.data=this.data.filter(element => element.name > "01-01 10:44" && element.name < "01-01 11:01"))
       }}>Last 15M</button>
+      <ResponsiveContainer width='100%' height={400}>
       <AreaChart activeLabel={<CustomizedDot x={50} y={50}/>} renderCursor={<CustomizedDot x={50} y={50}/>} renderActiveDot={<CustomizedDot x={50} y={50}/>} cursor="pointer" 
       margin={{ top: 0, left: 0, right: 0, bottom: 500 }} width={1336} height={250} data={this.state.data}
   margin={{ top: 10, right: 30, left: 0, bottom: 0 }}>
@@ -100,12 +101,13 @@ export default class Graphcomp extends Component {
   {/* <Legend /> */}
   <XAxis dataKey="name" tick={{ fontSize:"10px", size:"200px", paddingTop:"100px" }}  interval={1} angle={-23} />
   <YAxis dy={-5}/>
-  <Tooltip /*renderDots={<CustomizedDot x={50} y={50}/>} activeDot={<CustomizedDot x={5000} y={5000}/>}*//> 
+  <Tooltip content={<CustomTooltip/>} /*renderDots={<CustomizedDot x={50} y={50}/>} activeDot={<CustomizedDot x={5000} y={5000}/>}*//> 
   {/* cursor={<CustomCursor />} */}
   {/* <Line activeDot={<CustomizedDot x={50} y={50}/>} type="monotone" dataKey="pv" stroke="#8884d8" dot={<CustomizedDot x={50} y={50}/>} /> */}
  {/* <CustomizedDot/> */}
-  <Area /*renderDots={<CustomizedDot x={50} y={50}/>}*/ activeDot={<CustomizedDot x={50} y={50}/>} /*renderDotItem={<CustomizedDot x={50} y={50}/>}*/ type="monotone" dataKey="value"  fillOpacity={1} fill="url(#colorUv)" />
+  <Area isAnimationActive={false} /*dot={<CustomizedDot x={50} y={50}/>}*/ /*renderDots={<CustomizedDot x={50} y={50}/>}*/ /*activeDot={<CustomizedDot x={50} y={50}/>}*/ /*renderDotItem={<CustomizedDot x={50} y={50}/>}*/ type="monotone" dataKey="value"  fillOpacity={1} fill="url(#colorUv)" />
 </AreaChart>
+</ResponsiveContainer>
     </div>
         )
     }
@@ -116,6 +118,7 @@ function CustomTooltip({active, payload, label}){
     time = today.getHours() + ':' + today.getMinutes();
     if(active){
       return <div>
+      <CustomizedDot x={20} y={20}/>  
   <p>{label+", "+time}PM</p>
   </div>
     }
